@@ -32,46 +32,50 @@ public class FraganceService {
         }
     }
 
-    public Fragance update(Fragance accesory) {
+    public Fragance update(Fragance fragance) {
 
-        if (accesory.getReference() != null) {
-            Optional<Fragance> accesoryDb = clotheRepository.getClothe(accesory.getReference());
-            if (!accesoryDb.isEmpty()) {
+        if (fragance.getReference() != null) {
+            Optional<Fragance> fraganceDb = clotheRepository.getClothe(fragance.getReference());
+            if (!fraganceDb.isEmpty()) {
 
-                if (accesory.getBrand()!= null) {
-                    accesoryDb.get().setBrand(accesory.getBrand());
-                }
-
-                if (accesory.getCategory() != null) {
-                    accesoryDb.get().setCategory(accesory.getCategory());
+                if (fragance.getBrand()!= null) {
+                    fraganceDb.get().setBrand(fragance.getBrand());
                 }
 
-                if (accesory.getDescription() != null) {
-                    accesoryDb.get().setDescription(accesory.getDescription());
+                if (fragance.getCategory() != null) {
+                    fraganceDb.get().setCategory(fragance.getCategory());
                 }
-                if (accesory.getPrice() != 0.0) {
-                    accesoryDb.get().setPrice(accesory.getPrice());
+
+                if (fragance.getPresentation() != null) {
+                    fraganceDb.get().setPresentation(fragance.getPresentation());
                 }
-                if (accesory.getQuantity() != 0) {
-                    accesoryDb.get().setQuantity(accesory.getQuantity());
+
+                if (fragance.getDescription() != null) {
+                    fraganceDb.get().setDescription(fragance.getDescription());
                 }
-                if (accesory.getPhotography() != null) {
-                    accesoryDb.get().setPhotography(accesory.getPhotography());
+                if (fragance.getPrice() != 0.0) {
+                    fraganceDb.get().setPrice(fragance.getPrice());
                 }
-                accesoryDb.get().setAvailability(accesory.isAvailability());
-                clotheRepository.update(accesoryDb.get());
-                return accesoryDb.get();
+                if (fragance.getQuantity() != 0) {
+                    fraganceDb.get().setQuantity(fragance.getQuantity());
+                }
+                if (fragance.getPhotography() != null) {
+                    fraganceDb.get().setPhotography(fragance.getPhotography());
+                }
+                fraganceDb.get().setAvailability(fragance.isAvailability());
+                clotheRepository.update(fraganceDb.get());
+                return fraganceDb.get();
             } else {
-                return accesory;
+                return fragance;
             }
         } else {
-            return accesory;
+            return fragance;
         }
     }
 
     public boolean delete(String reference) {
-        Boolean aBoolean = getClothe(reference).map(accesory -> {
-            clotheRepository.delete(accesory);
+        Boolean aBoolean = getClothe(reference).map(fragance -> {
+            clotheRepository.delete(fragance);
             return true;
         }).orElse(false);
         return aBoolean;
