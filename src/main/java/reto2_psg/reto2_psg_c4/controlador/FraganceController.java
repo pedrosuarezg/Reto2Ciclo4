@@ -26,8 +26,8 @@ public class FraganceController {
         }
 
         @GetMapping("/{reference}")
-        public Optional<Fragance> getClothe(@PathVariable("reference") String reference) {
-            return fraganceService.getClothe(reference);
+        public Optional<Fragance> getFragance(@PathVariable("reference") String reference) {
+            return fraganceService.getFragance(reference);
         }
 
         @PostMapping("/new")

@@ -14,28 +14,28 @@ import java.util.Optional;
 @Service
 public class FraganceService {
     @Autowired
-    private FraganceRepositorio clotheRepository;
+    private FraganceRepositorio fraganceRepositorio;
 
     public List<Fragance> getAll() {
-        return clotheRepository.getAll();
+        return fraganceRepositorio.getAll();
     }
 
-    public Optional<Fragance> getClothe(String reference) {
-        return clotheRepository.getClothe(reference);
+    public Optional<Fragance> getFragance(String reference) {
+        return fraganceRepositorio.getFragance(reference);
     }
 
-    public Fragance create(Fragance accesory) {
-        if (accesory.getReference() == null) {
-            return accesory;
+    public Fragance create(Fragance fragance) {
+        if (fragance.getReference() == null) {
+            return fragance;
         } else {
-            return clotheRepository.create(accesory);
+            return fraganceRepositorio.create(fragance);
         }
     }
 
     public Fragance update(Fragance fragance) {
 
         if (fragance.getReference() != null) {
-            Optional<Fragance> fraganceDb = clotheRepository.getClothe(fragance.getReference());
+            Optional<Fragance> fraganceDb = fraganceRepositorio.getFragance(fragance.getReference());
             if (!fraganceDb.isEmpty()) {
 
                 if (fragance.getBrand()!= null) {
@@ -63,7 +63,7 @@ public class FraganceService {
                     fraganceDb.get().setPhotography(fragance.getPhotography());
                 }
                 fraganceDb.get().setAvailability(fragance.isAvailability());
-                clotheRepository.update(fraganceDb.get());
+                fraganceRepositorio.update(fraganceDb.get());
                 return fraganceDb.get();
             } else {
                 return fragance;
@@ -74,8 +74,8 @@ public class FraganceService {
     }
 
     public boolean delete(String reference) {
-        Boolean aBoolean = getClothe(reference).map(fragance -> {
-            clotheRepository.delete(fragance);
+        Boolean aBoolean = getFragance(reference).map(fragance -> {
+            fraganceRepositorio.delete(fragance);
             return true;
         }).orElse(false);
         return aBoolean;
